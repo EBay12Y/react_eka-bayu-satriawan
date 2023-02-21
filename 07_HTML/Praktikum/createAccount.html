@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+</head>
+<body>
+    <h1>Create Account</h1>
+    <h2>Detail Form</h2>
+    <form action="#">
+        <div>
+            <label for="first-name">First name :</label><br>
+            <input type="text" name="first-name" id="first-name" required>
+        </div>
+        <div><br>
+            <label for="last-name">Last name :</label><br>
+            <input type="text" name="last-name" id="last-name" required>
+        </div>
+        <div><br>
+            <label for="username">Username :</label><br>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div><br>
+            <label for="email">Email :</label><br>
+            <input type="text" name="email" id="email" required>
+        </div>
+        <div><br>
+            <div>
+                <label for="gender">Gender :</label><br>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+            </div>
+            <div>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            <div>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+            </div>
+        </div>
+        <div><br>
+            <label for="address-1">Address </label><br>
+            <input type="text" name="address-1" id="address-1" required>
+        </div>
+        <div><br>
+            <label for="address-2">Address 2 </label><br>
+            <input type="text" name="address-2" id="address-2" required>
+        </div>
+        <div><br>
+            <label for="nasionality">Nasionality</label><br>
+            <select name="nasionality" id="nasionality" required>
+                <option value="default">. . . . . . . . .</option>
+                <option value="A">Lorem</option>
+                <option value="B">Ipsum</option>
+                <option value="C">Dolor</option>
+            </select>
+        </div>
+        <div><br>
+            <div>
+                <label for="lang">Language Spoken :</label><br>
+                <input type="checkbox" id="bahasa" name="lang" value="bahasa">
+                <label for="bahasa">Bahasa Indonesia</label>
+            </div>
+            <div>
+                <input type="checkbox" id="english" name="lang" value="english">
+                <label for="english">English</label>
+            </div>
+            <div>
+                <input type="checkbox" id="other" name="lang" value="other">
+                <label for="other">Other</label>
+            </div>
+        </div>
+        <br>
+        <!-- <button type="submit" form="form1" value="Submit">Submit</button> -->
+        <input type="submit" value="Create Account">
+    </form>
+</body>
+</html>

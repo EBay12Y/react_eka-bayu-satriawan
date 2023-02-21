@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+</head>
+<body>
+    <h1>Create Product</h1>
+    <h2>Detail Product</h2>
+    <form action="#">
+        <div>
+            <label for="product-name">Product Name :</label><br>
+            <input type="text" name="product-name" id="product-name" minlength="6" maxlength="50" required>
+        </div>
+        <div><br>
+            <label for="product-category">Product Category :</label><br>
+            <select name="product-category" id="product-category" required>
+                <option value="default">. . . . . . . . .</option>
+                <option value="A">Lorem</option>
+                <option value="B">Ipsum</option>
+                <option value="C">Dolor</option>
+            </select>
+        </div>
+        <div><br>
+            <div>
+                <label for="product-freshness">Product Freshness :</label><br>
+                <input type="radio" id="brand-new" name="product-freshness" value="Brand New">
+                <label for="brand-new">Brand New</label>
+            </div>
+            <div>
+                <input type="radio" id="second-hank" name="product-freshness" value="Second Hank">
+                <label for="second-hank">Second Hank</label>
+            </div>
+            <div>
+                <input type="radio" id="refurbished" name="product-freshness" value="Refurbished">
+                <label for="refurbished">Refurbished</label>
+            </div>
+        </div>
+        <div><br>
+            <label for="product-image">Image of Product </label>
+            <input type="file" id="myFile" name="filename" required>
+        </div>
+        <div><br>
+            <label for="additional-description">Additional Description </label><br>
+            <textarea name="" id="" cols="30" rows="10" required></textarea>
+        </div>
+        <div><br>
+            <label for="product-price">Product Price :</label><br>
+            <input type="number" required>
+        </div>
+        <br>
+        <!-- <button type="submit" form="form1" value="Submit">Submit</button> -->
+        <input type="submit">
+    </form>
+</body>
+</html>
