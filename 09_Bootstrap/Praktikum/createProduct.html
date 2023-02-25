@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Create Product</title>
+</head>
+
+<body>
+    <header>
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg shadow sticky-top bg-white">
+            <div class="container-fluid mx-3">
+                <a class="navbar-brand" href="#">Simple Header</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active bg-primary text-white px-3 mx-2" aria-current="page"
+                                href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary px-3 mx-2" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary px-3 mx-2" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary px-3 mx-2" href="#">FAQs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary px-3 mx-2" href="#">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+    </header>
+    <main>
+        <section class="d-grid justify-content-center py-5">
+            <div class="text-center">
+                <img src="assets/bootstrap-logo.svg" alt="">
+                <h1 class="mt-4">Create Product</h1>
+                <p>
+                    Below is an example form built entirely with Bootstrap's form controls. Each required form group has
+                    a validation state that can be triggered by attempting to submit the form without completing it.
+                </p>
+            </div>
+            <form action="#" method="post" class="container-fluid mt-5">
+                <h3 class="mb-4">Detail Product</h3>
+                <div class="mb-3 col-md-4 col-sm-8 has-validation">
+                    <label for="validationProductName" class="form-label">Product Name</label>
+                    <input type="text" name="product-name" class="form-control" id="validationProductName" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="mb-3 col-md-4 col-sm-6 has-validation">
+                    <label for="product-category" class="form-label">Product Category</label>
+                    <select name="product-category" class="form-select" required>
+                        <option selected="" disabled="" value="">Pilih kategori produk</option>
+                        <option value="category 1">Category 1</option>
+                        <option value="category 2">Category 2</option>
+                        <option value="category 3">Category 3</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a valid state.</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="mb-3 col-md-4 col-sm-6 has-validation">
+                    <label for="product-category" class="form-label">Image of Product</label>
+                    <input type="file" name="image" required class="form-control">
+                    <div class="invalid-feedback">Please provide a valid image.</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="mb-3 col-md-4 col-sm-6">
+                    <label class="pb-1 form-label">Product Freshness</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="validationProductBrandNew" name="radio-stacked"
+                            required>
+                        <label for="validationProductBrandNew" class="form-check-label">Brand New</label>
+                        <div class="invalid-feedback">Please choose one</div>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="validationSecondHand" name="radio-stacked"
+                            required>
+                        <label for="validationSecondHand" class="form-check-label">Second Hand</label>
+                        <div class="invalid-feedback">Please choose one</div>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="validationRefurbrished" name="radio-stacked"
+                            required>
+                        <label for="validationRefurbrished" class="form-check-label">Refurbrished
+                        </label>
+                        <div class="invalid-feedback">Please choose one</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Additional Description</label>
+                    <textarea class="form-control" rows="5" required></textarea>
+                    <div class="invalid-feedback">Please provide a description</div>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+                <div class="mb-5 has-validation">
+                    <label for="validationProductPrice" class="form-label">Product Price</label>
+                    <input type="number" name="price" class="form-control" id="validationProductPrice" placeholder="$1"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-5" id="btn-submit" data-toggle="modal" data-target="#myModal">Submit</button>
+            </form>
+        </section>
+    </main>
+    <!-- Modal Start-->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Caution</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please fill in the data completely
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-6UZm6wZzW8DvLBO1rs5+5XLx60y+6rMvCJmqHdZPfzZnq3gkA+72YX9nyBE+SPy"
+        crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function(){
+        $("#myModal").modal('show');
+    });
+    </script>
+</body>
+
+</html>
