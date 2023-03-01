@@ -1,0 +1,39 @@
+.c-item {
+    height: 760px;
+}
+
+.c-img {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+footer {
+    background-color: #212529;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: #0d6efd;
+}
+
+.nav-item {
+    border-radius: 5px;
+}
+
+.nav-item:hover {
+    background-color: #198754;
+}
+
+input:hover {
+    background-color: #e9ecef;
+}
+
+textarea:hover {
+    background-color: #e9ecef;
+}
+
