@@ -36,5 +36,5 @@ city: 'Surabaya',
 state: 'ID'
 }
 };
-console.log(person.name); // Output: Saya
-console.log(person.address.city); // Output: Surabaya
+console.log(person.name); // akan mengasilkan output : Saya
+console.log(person.address.city); // akan mengasilkan output : Surabaya
