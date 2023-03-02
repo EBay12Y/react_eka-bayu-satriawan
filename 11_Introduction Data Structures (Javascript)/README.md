@@ -29,12 +29,12 @@ console.log(array[2]);// akan mengasilkan output : dolor
 Object merupakan data structure lainnya yang paling umum digunakan pada JavaScript. Object digunakan untuk merepresentasikan sebuah objek atau entitas tertentu yang memiliki properti dan nilai. Object dapat dimanipulasi dengan berbagai metode seperti Object.keys(), Object.values(), dan Object.entries().
 // Contoh penerapan
 let person = {
-name: 'Saya',
-age: 25,
-address: {
-city: 'Surabaya',
-state: 'ID'
-}
+  name: 'Saya',
+  age: 25,
+  address: {
+    city: 'Surabaya',
+    state: 'ID'
+  }
 };
 console.log(person.name); // akan mengasilkan output : Saya
 console.log(person.address.city); // akan mengasilkan output : Surabaya
