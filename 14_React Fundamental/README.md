@@ -10,13 +10,13 @@ Komponen React merupakan bagian kode yang dapat digunakan kembali yang digunakan
 Props atau properties dapat membantu untuk membuat komponen menjadi lebih dinamis, dengan kata lain props dapat mengubah argumen atau data pada komponen.
 
 ## Conditional 
-Render Bersyarat : Membuat komponen berbeda yang mencangkup perilaku yang dibutuhkan, lalu kita dapat me-render hanya beberapa bagian saja, berdasarkan state aplikasi anda.
+Render Bersyarat : Membuat komponen berbeda yang mencakup perilaku yang dibutuhkan, lalu kita dapat melakukan render hanya di beberapa bagian saja, berdasarkan state aplikasi anda.
 -	Menggunakan If
 -	Inline If dengan operator &&
 -	Inline If-Else dengan ternary conditional operator
 -	Mencegah komponen untuk rendering
 Render List : membangun koleksi dari beberapa elemen dan menyertakan dalam JSX menggunakan tanda kurung kurawal {}.
-Key : membantu react untuk mengidentifikasi item mana yang telah diubah, ditambahkan, atau dihilangkan.
+Key : membantu react untuk mengidentifikasi item yang telah diubah, ditambahkan, atau dihilangkan.
 
 ## Directory Structure
 React merupakan sebuah library, jadi react tidak memiliki pendapat tentang bagaimana cara memasukkan file ke folder. 
