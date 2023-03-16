@@ -24,7 +24,7 @@ Aturan pada hooks:
 - Jangan memanggil hooks dari fungsi-fungsi javascript biasa
 
 ## Use State & Use Effect
-useState dapat digunakan untuk mendeklarasikan dan memanipulasi state pada komponen react. Dengan menggunakan useState code yang kita tuliskan akan menjadi lebih singkat.
+useState akan mengembalikan nilai dari state (pada contoh diatas: name) dan fungsi yang bisa kita gunakan untuk mengubah nilai tersebut (setName). Dengan menggunakan useState code yang kita tuliskan akan menjadi lebih singkat.
 
 useEffect memungkinkan kita melakukan efek samping (side effects) di dalam function component. componentDidMount, componentDidUpdate, dan componentWillUnmount = useEffect. Ada 2 jenis useEffect: butuh pembersihan dan tidak butuh pembersihan.
 
