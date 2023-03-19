@@ -13,10 +13,10 @@ const DetailProduct = () => {
         <div>
             <Navbar />
             {products.map((product) => (
-                <div key={product.id}>
+                <div key={product.id} className="p-5">
                     {product.id == id && (
-                        <div className="d-flex min-vh-100 justify-content-center align-items-center">
-                            <div className="w-25 p-5 rounded shadow">
+                        <div className="d-flex m-5 justify-content-center align-items-center">
+                            <div className="w-50 p-5 rounded shadow">
                                 <Link to="/createproduct">
                                     <button className="btn btn-primary mb-3">Kembali</button>
                                 </Link>
