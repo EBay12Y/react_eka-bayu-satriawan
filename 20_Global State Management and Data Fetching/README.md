@@ -1,1 +1,1 @@
-// membuat resume
+# (20) Resume Materi Global State Management
