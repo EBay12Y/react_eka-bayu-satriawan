@@ -10,17 +10,29 @@ import {
 
 const Footer = () => {
     return (
-        <div className='max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300'>
+        <div className='max-w-[1240px] mx-auto py-16 px-6 grid lg:grid-cols-3 gap-8 text-gray-300'>
             <div>
                 <h1 className='w-full text-3xl font-bold text-primary'>EBayProject</h1>
-                <p className='py-4'>(+62)882-2713-6649 <br></br>Surabaya, Jawa Timur, 60274</p>
+                <p className='py-4'>(+62)882-9999-8888 <br></br>Surabaya, Jawa Timur, 60274</p>
                 <div className='flex justify-between md:w-[75%] my-6'>
-                    <FaFacebookSquare size={30} />
-                    <FaInstagramSquare size={30} />
-                    <FaTiktok size={30} />
-                    <FaGithubSquare size={30} />
-                    <FaYoutubeSquare size={30} />
-                    <FaLinkedin size={30} />
+                    <a href="https://www.facebook.com/" target='_blank' rel="noreferrer">
+                        <FaFacebookSquare size={30} />
+                    </a>
+                    <a href="https://www.instagram.com/ekabayu_12/" target='_blank' rel="noreferrer">
+                        <FaInstagramSquare size={30} />
+                    </a>
+                    <a href="https://www.tiktok.com/@ekabayu_12" target='_blank' rel="noreferrer">
+                        <FaTiktok size={30} />
+                    </a>
+                    <a href="https://github.com/EBay12Y" target='_blank' rel="noreferrer">
+                        <FaGithubSquare size={30} />
+                    </a>
+                    <a href="https://www.youtube.com/@ekabayu_12" target='_blank' rel="noreferrer">
+                        <FaYoutubeSquare size={30} />
+                    </a>
+                    <a href="https://www.linkedin.com/in/eka-bayu-satriawan/" target='_blank' rel="noreferrer">
+                        <FaLinkedin size={30} />
+                    </a>
                 </div>
             </div>
             <div className='lg:col-span-2 flex justify-between mt-6'>
