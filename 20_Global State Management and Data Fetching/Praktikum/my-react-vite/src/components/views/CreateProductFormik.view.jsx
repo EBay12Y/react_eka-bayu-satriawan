@@ -4,14 +4,18 @@ import logoBS from "../../assets/img/bootstrap-logo.svg";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Navbar, Article } from '../organism';
+import { useDispatch, useSelector } from 'react-redux';
+import { productAction } from '../../config/redux/product/productSlice';
 
 const validationSchema = Yup.object().shape({
     productName: Yup.string()
         .required('Product name is required')
         .matches(/^[a-zA-Z ]+$/, 'Product name must only contain letters and spaces'),
     productCategory: Yup.string().required('Product category is required'),
-    productImage: Yup.mixed().required('Product image is required'),
+    image: Yup.mixed().required('Product image is required'),
     productFreshness: Yup.string().required('Product freshness is required'),
+    additionalDescription: Yup.string()
+        .required('Additional Description is required'),
     productPrice: Yup.number()
         .typeError('Product price must be a number')
         .required('Product price is required')
@@ -21,65 +25,40 @@ const validationSchema = Yup.object().shape({
 const CreateProductFormik = () => {
     const [isIndonesia, setIsIndonesia] = useState(false);
     const handleBahasa = () => setIsIndonesia(!isIndonesia);
-    const [products, setProducts] = useState([
-        {
-            id: "121234125",
-            productName: "Kaos",
-            productCategory: "1",
-            productImage: "gambar1.jpg",
-            productFreshness: "Brand New",
-            productPrice: "34500",
-        },
-        {
-            id: "432242342",
-            productName: "Tas",
-            productCategory: "2",
-            productImage: "gambar2.jpg",
-            productFreshness: "Second",
-            productPrice: "65000",
-        },
-        {
-            id: "543425234",
-            productName: "Jeans",
-            productCategory: "3",
-            productImage: "gambar3.jpg",
-            productFreshness: "Refurbished",
-            productPrice: "75900",
-        },
-    ]);
-
+    const products = useSelector((state) => state.products.products);
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: {
             id: '',
             productName: '',
             productCategory: '',
-            productImage: null,
+            image: null,
             productFreshness: '',
+            additionalDescription: '',
             productPrice: '',
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log(values);
             const newProduct = {
-                id: Math.floor(Math.random() * 10000000000),
+                id: Math.random().toString(36).substring(2, 18),
                 productName: values.productName,
                 productCategory: values.productCategory,
-                productImage: values.productImage.name,
+                image: values.image.name,
                 productFreshness: values.productFreshness,
+                additionalDescription: values.additionalDescription,
                 productPrice: values.productPrice
             };
+            console.log(newProduct);
 
-            const updatedProducts = [...products, newProduct];
-            setProducts(updatedProducts);
+            dispatch(productAction.add([...products, newProduct]));
 
             formik.resetForm();
         },
     });
 
-    const handleDelete = (id) => {
-        if (window.confirm("Apakah Anda yakin ingin menghapus data dengan id: " + id + " ini?")) {
-            const newProducts = products.filter((item) => item.id !== id);
-            setProducts(newProducts);
+    const handleDelete = (productId) => {
+        if (window.confirm("Are you sure to delete this product?")) {
+            dispatch(productAction.delete(productId));
         }
     };
 
@@ -102,13 +81,14 @@ const CreateProductFormik = () => {
                         {isIndonesia ? "Ganti Bahasa" : "Change Language"}
                     </button>
                 </div>
-                <form onSubmit={formik.handleSubmit} className="d-grid justify-content-center mt-5">
-                    <div className="mb-4">
-                        <label htmlFor="productName">Product Name</label><br />
+                <form onSubmit={formik.handleSubmit} className="container-fluid mt-5">
+                    <div className="mb-3 col-md-4 col-sm-8">
+                        <label htmlFor="productName" className="form-label">Product Name</label>
                         <input
                             type="text"
                             id="productName"
                             name="productName"
+                            className='form-control'
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.productName}
@@ -117,83 +97,119 @@ const CreateProductFormik = () => {
                             <div>{formik.errors.productName}</div>
                         ) : null}
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="productCategory">Product Category</label><br />
+                    <div className="mb-3 col-md-4 col-sm-6">
+                        <label htmlFor="productCategory" className="form-label">Product Category</label>
                         <select
                             id="productCategory"
                             name="productCategory"
+                            className="form-select"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.productCategory}
                         >
                             <option value="">--Select--</option>
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="3">Category 3</option>
+                            <option value="Category 1">Category 1</option>
+                            <option value="Category 2">Category 2</option>
+                            <option value="Category 3">Category 3</option>
                         </select>
                         {formik.touched.productCategory && formik.errors.productCategory ? (
                             <div>{formik.errors.productCategory}</div>
                         ) : null}
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="productImage">Product Image</label><br />
+                    <div className="mb-3 col-md-4 col-sm-6">
+                        <label htmlFor="image" className="form-label">Product Image</label>
                         <input
                             type="file"
-                            id="productImage"
-                            name="productImage"
+                            id="image"
+                            name="image"
+                            className='form-control'
                             onChange={(event) => {
-                                formik.setFieldValue("productImage", event.currentTarget.files[0])
+                                formik.setFieldValue("image", event.currentTarget.files[0])
                             }}
                         />
-                        {formik.touched.productImage && formik.errors.productImage ? (
-                            <div>{formik.errors.productImage}</div>
+                        {formik.touched.image && formik.errors.image ? (
+                            <div>{formik.errors.image}</div>
                         ) : null}
                     </div>
 
-                    <div className="mb-4">
-                        <label>
+                    <div className="mb-3 col-md-4 col-sm-6">
+                        <label className="pb-1 form-label">
                             Product Freshness:
-                            <br />
-                            <input
-                                type="radio"
-                                name="productFreshness"
-                                value="Brand New"
-                                checked={formik.values.productFreshness === 'Brand New'}
-                                onChange={formik.handleChange} />
-                            Brand New
-                            <br />
-
-                            <input
-                                type="radio"
-                                name="productFreshness"
-                                value="Second Hand"
-                                checked={formik.values.productFreshness === 'Second Hand'}
-                                onChange={formik.handleChange} />
-                            Second Hand
-                            <br />
-
-                            <input
-                                type="radio"
-                                name="productFreshness"
-                                value="Refurbished"
-                                checked={formik.values.productFreshness === 'Refurbished'}
-                                onChange={formik.handleChange} />
-                            Refurbished
-                            <br />
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    id="validationProductBrandNew"
+                                    name="productFreshness"
+                                    value="Brand New"
+                                    className="form-check-input"
+                                    checked={formik.values.productFreshness === 'Brand New'}
+                                    onChange={formik.handleChange} />
+                                <label
+                                    htmlFor="validationProductBrandNew"
+                                    className="form-check-label">
+                                    Brand New
+                                </label>
+                            </div>
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    id="validationSecondHand"
+                                    name="productFreshness"
+                                    value="Second Hand"
+                                    className="form-check-input"
+                                    checked={formik.values.productFreshness === 'Second Hand'}
+                                    onChange={formik.handleChange} />
+                                <label
+                                    htmlFor="validationSecondHand"
+                                    className="form-check-label">
+                                    Second Hand
+                                </label>
+                            </div>
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    id="validationRefurbrished"
+                                    name="productFreshness"
+                                    value="Refurbished"
+                                    className="form-check-input"
+                                    checked={formik.values.productFreshness === 'Refurbished'}
+                                    onChange={formik.handleChange} />
+                                <label
+                                    htmlFor="validationSecondHand"
+                                    className="form-check-label">
+                                    Refurbished
+                                </label>
+                            </div>
                             {formik.touched.productFreshness && formik.errors.productFreshness ? (
                                 <div>{formik.errors.productFreshness}</div>
                             ) : null}
                         </label>
-                        <br />
+                    </div>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="additionalDescription"
+                            className="form-label">Additional Description</label>
+                        <textarea
+                            id="additionalDescription"
+                            name='additionalDescription'
+                            className="form-control"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.additionalDescription}
+                            rows={5} />
+                        {formik.touched.additionalDescription && formik.errors.additionalDescription ? (
+                            <div>{formik.errors.additionalDescription}</div>
+                        ) : null}
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="productPrice">Product Price</label><br />
+                    <div className="mb-3 col-md-4 col-sm-6">
+                        <label htmlFor="productPrice" className="form-label">Product Price</label>
                         <input
                             type="number"
                             id="productPrice"
                             name="productPrice"
+                            className='form-control'
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.productPrice}
@@ -217,31 +233,31 @@ const CreateProductFormik = () => {
                                 <th scope="col">Product Category</th>
                                 <th scope="col">Product Image</th>
                                 <th scope="col">Product Freshness</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Product Price</th>
-                                <th scope="col">Lihat Detail</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {products.map((product) => (
                                 <tr key={product.id}>
-                                    <th scope="col">{product.id}</th>
-                                    <th scope="col">{product.productName}</th>
-                                    <th scope="col">{product.productCategory}</th>
-                                    <th scope="col">{product.productImage}</th>
-                                    <th scope="col">{product.productFreshness}</th>
-                                    <th scope="col">{product.productPrice}</th>
-                                    <th>
+                                    <td>{product.id}</td>
+                                    <td>{product.productName}</td>
+                                    <td>{product.productCategory}</td>
+                                    <td>{product.image}</td>
+                                    <td>{product.productFreshness}</td>
+                                    <td>{product.additionalDescription}</td>
+                                    <td>{product.productPrice}</td>
+                                    <td>
                                         <Link to={`/detailproduct/${product.id}`}>
-                                            Detail {product.id}
+                                            <button className="btn btn-outline-warning me-2">Edit</button>
                                         </Link>
-                                    </th>
-                                    <button className="btn btn-outline-warning me-2">Edit</button>
-                                    <button
-                                        className="btn btn-outline-danger"
-                                        onClick={() => handleDelete(product.id)}>
-                                        Delete
-                                    </button>
+                                        <button
+                                            className="btn btn-outline-danger"
+                                            onClick={() => handleDelete(product.id)}>
+                                            Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

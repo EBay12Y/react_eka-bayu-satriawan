@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { Navbar, ProductForm, Footer, Article, ProductList } from "../organism";
 
 const CreateProduct = () => {
@@ -7,6 +8,8 @@ const CreateProduct = () => {
     const [productCategory, setProductCategory] = useState();
     const [productImage, setProductImage] = useState();
     const [productPrice, setProductPrice] = useState();
+    const stateGlobal = useSelector(state => state);
+
     const [products, setProducts] = useState([
         {
             id: "121234125",

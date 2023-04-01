@@ -2,8 +2,8 @@ import React from 'react'
 
 const Article = {
     title: {
-        id: "Buat Akun",
-        en: "Create Account"
+        id: "Buat Produk",
+        en: "Create Product"
     },
     description: {
         id: "Di bawah ini adalah contoh formulir yang dibuat seluruhnya dengan kontrol formulir Bootstrap. Setiap grup formulir yang diperlukan memiliki status validasi yang dapat dipicu dengan mencoba mengirimkan formulir tanpa menyelesaikannya.",
