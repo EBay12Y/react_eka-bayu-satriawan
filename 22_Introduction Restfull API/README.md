@@ -21,4 +21,4 @@ Link Open API : [https://github.com/public-apis/public-apis](https://github.com/
 Package API :
 
 - Net/http : sebuah package yang bisa digunakan untuk membuat sebuah server API dan mengkonsumnya.
-- Encoding/Json : sebuah package yang digunakan untuk mendecode.
+- Encoding/Json : sebuah package yang digunakan untuk melakukan decode.
