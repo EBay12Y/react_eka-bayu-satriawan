@@ -1,148 +1,112 @@
-import React, { useCallback } from 'react';
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { Navbar, Footer } from "../organism";
-import { Link } from 'react-router-dom';
-import logoBS from "../../assets/img/bootstrap-logo.svg";
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SignupFormik = () => {
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
-            firstName: '',
-            lastName: '',
+            firstname: '',
+            lastname: '',
             username: '',
             email: '',
             password: '',
             confirmPassword: '',
         },
+        // validation schema
         validationSchema: Yup.object({
-            firstName: Yup.string()
-                .min(3, 'First name must be at least 3 characters')
-                .required('First name is required'),
-            lastName: Yup.string()
-                .min(3, 'Last name must be at least 3 characters')
-                .required('Last name is required'),
-            username: Yup.string().required('Username is required'),
+            firstname: Yup.string()
+                .min(3, 'First name minimum 3 characters')
+                .required(),
+            lastname: Yup.string()
+                .min(3, 'Last name minimum 3 characters')
+                .required(),
+            username: Yup.string()
+                .required(),
             email: Yup.string()
-                .email('Invalid email format')
-                .required('Email is required'),
+                .required()
+                .email('Invalid email format'),
             password: Yup.string()
-                .min(8, 'Password must be at least 8 characters')
-                .required('Password is required'),
+                .required()
+                .min(8, 'Should more than 8 characters'),
             confirmPassword: Yup.string()
-                .oneOf([Yup.ref('password'), null], 'Passwords must match')
-                .required('Confirm password is required'),
+                .required()
+                .oneOf([Yup.ref('password')], 'Password must match'),
         }),
+        // handle submission
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
-        },
+            formik.resetForm();
+            alert("Register success")
+            console.log('form values', (values))
+            const dataUser = {
+                firstname: values.firstname,
+                lastname: values.lastname,
+                username: values.username,
+                email: values.email,
+                password: values.password,
+                confirmPassword: values.confirmPassword
+            };
+            localStorage.setItem("dataUser", JSON.stringify(dataUser));
+            navigate('/login')
+        }
     });
-
     return (
-        <>
-            <Navbar />
-            <section className="d-grid justify-content-center">
-                <div className="text-center">
-                    <img src={logoBS} alt="logo" className='m-4' />
-                    <h2 className='mb-5'>Form Registrasi</h2>
+        <div>
+            <div className="container pt-5 pb-5">
+                <div className="row justify-content-center">
+                    <h2 className='text-center'>Register Form</h2>
+                    <div className="col-lg-6">
+                        <hr />
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className="form-group mb-3">
+                                <label htmlFor="firstname">First Name</label>
+                                <input type="text" className="form-control" name="firstname" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.firstname} />
+                                {formik.touched.firstname && formik.errors.firstname && <div className='error text-danger'>{formik.errors.firstname}</div>}
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="lastname">Last Name</label>
+                                <input type="text" className="form-control" name="lastname" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.lastname} />
+                                {formik.touched.lastname && formik.errors.lastname && <div className='error text-danger'>{formik.errors.lastname}</div>}
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" className="form-control" name="username" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.username} />
+                                {formik.touched.username && formik.errors.username && <div className='error text-danger'>{formik.errors.username}</div>}
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="email">Email</label>
+                                <input type="email" className="form-control" name="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
+                                {formik.touched.email && formik.errors.email && <div className='error text-danger'>{formik.errors.email}</div>}
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" className="form-control" name="password" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.password} />
+                                {formik.touched.password && formik.errors.password && <div className='error text-danger'>{formik.errors.password}</div>}
+                            </div>
+                            <div className="form-group mb-3">
+                                <label htmlFor="confirmPassword">Confirm Password</label>
+                                <input type="password" className="form-control" name="confirmPassword" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.confirmPassword} />
+                                {formik.touched.confirmPassword && formik.errors.confirmPassword && <div className='error text-danger'>{formik.errors.confirmPassword}</div>}
+                            </div>
+                            <p className='mt-2'>Sudaah memiliki akun? <Link to={'/login'}>Login sekarang!</Link></p>
+                            <div className="form-group text-center">
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary mt-3 submit"
+                                    name="submit-button"
+                                    width="200px"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <form onSubmit={formik.handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="firstName">First Name:</label><br />
-                        <input
-                            type="text"
-                            id="firstName"
-                            name="firstName"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.firstName}
-                        />
-                        {formik.touched.firstName && formik.errors.firstName ? (
-                            <div>{formik.errors.firstName}</div>
-                        ) : null}
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="lastName">Last Name:</label><br />
-                        <input
-                            type="text"
-                            id="lastName"
-                            name="lastName"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.lastName}
-                        />
-                        {formik.touched.lastName && formik.errors.lastName ? (
-                            <div>{formik.errors.lastName}</div>
-                        ) : null}
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="username">Username:</label><br />
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.username}
-                        />
-                        {formik.touched.username && formik.errors.username ? (
-                            <div>{formik.errors.username}</div>
-                        ) : null}
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="email">Email:</label><br />
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.email}
-                        />
-                        {formik.touched.email && formik.errors.email ? (
-                            <div>{formik.errors.email}</div>
-                        ) : null}
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="password">Password:</label><br />
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.password}
-                        />
-                        {formik.touched.password && formik.errors.password ? (
-                            <div>{formik.errors.password}</div>
-                        ) : null}
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="confirmPassword">Confirm Password:</label><br />
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.confirmPassword}
-                        />
-                        {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                            <div>{formik.errors.confirmPassword}</div>
-                        ) : null}
-                    </div>
-                    <button type="submit" className='btn btn-primary'>Submit</button>
-                </form>
-                <p className='mt-5'>Sudah punya akun?
-                    <Link to="/signupformik">
-                        Login
-                    </Link>
-                </p>
-            </section>
-        </>
-    );
+            </div>
+        </div>
+    )
+}
 
-};
-
-export default SignupFormik
+export default SignupFormik;

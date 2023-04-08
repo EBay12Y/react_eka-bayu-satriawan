@@ -6,7 +6,7 @@ const ProductForm = ({
     formik,
     article,
     bahasa,
-    gantiBahasa
+    gantiBahasa,
 }) => {
 
     return (
@@ -17,6 +17,7 @@ const ProductForm = ({
                         Kembali
                     </button>
                 </Link>
+                {/* <button onClick={handleLogout}>Logout</button> */}
                 <div className="text-center">
                     <img src={logoBS} alt="logo" />
                     <h1 className="mt-4">{bahasa ? article.title.id : article.title.en}</h1>

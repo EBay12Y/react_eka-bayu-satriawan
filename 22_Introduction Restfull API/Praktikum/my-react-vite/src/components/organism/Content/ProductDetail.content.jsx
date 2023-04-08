@@ -57,7 +57,7 @@ const ProductDetail = ({ product, formik }) => {
                         name="image"
                         className='form-control'
                         onChange={(event) => {
-                            formik.setFieldValue("image", event.currentTarget.files[0])
+                            formik.setFieldValue("image", event.target.files[0].name);
                         }}
                     />
                     {formik.values.image &&

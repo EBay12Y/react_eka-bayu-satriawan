@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { Footer, Navbar, ProductDetail } from '../organism'
+import { updateProductById } from '../../config/redux/product/productThunk';
 // import { useProductsSelector } from '../../config/redux/product/productSelector';
 
 const validationSchema = Yup.object().shape({
@@ -23,10 +24,12 @@ const validationSchema = Yup.object().shape({
 
 const DetailProduct = () => {
     const { id } = useParams();
-    const products = useProductsSelector();
-    const product = products.find((p) => p.id === id);
+    const products = useSelector((state) => state.product.products);
+    const product = products.find((product) => product.id === id);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log(product);
 
     const formik = useFormik({
         initialValues: {
@@ -40,22 +43,7 @@ const DetailProduct = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            const updatedProduct = {
-                id: values.id,
-                productName: values.productName,
-                productCategory: values.productCategory,
-                image: values.image.name,
-                productFreshness: values.productFreshness,
-                additionalDescription: values.additionalDescription,
-                productPrice: values.productPrice
-            };
-            console.log(updatedProduct);
-
-            // dispatch(productAction.update({
-            //     id: product.id,
-            //     updatedProduct: updatedProduct,
-            // }));
-
+            dispatch(updateProductById({ ...values }));
             navigate('/createproductformik');
         },
     });

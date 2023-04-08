@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { Navbar, Article, ProductForm, ProductList } from '../organism';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveProducts, createProduct, deleteProductById, updateProductById } from '../../config/redux/product/productThunk';
-// import { useProductTypeSelector } from '../../config/redux/product/productSelector';
-// import { useProductsSelector, useProductTypeSelector } from '../../config/redux/product/productSelector';
 
 const validationSchema = Yup.object().shape({
     productName: Yup.string()
@@ -35,25 +33,21 @@ const CreateProductFormik = () => {
     }, []);
 
     useEffect(() => {
-        console.log(productType)
+        // console.log(productType);
         if (productType === createProduct.fulfilled.type) {
             dispatch(retrieveProducts());
-            alert('Add Success');
         }
         if (productType === deleteProductById.fulfilled.type) {
             dispatch(retrieveProducts());
-            alert('Delete Success');
         }
         if (productType === updateProductById.fulfilled.type) {
             dispatch(retrieveProducts());
-            alert('Update Success');
         }
 
-    }, [productType])
+    }, [productType]);
 
     const formik = useFormik({
         initialValues: {
-            // id: randomId,
             productName: '',
             productCategory: '',
             image: null,
@@ -63,19 +57,17 @@ const CreateProductFormik = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log(values);
-
             dispatch(createProduct({ ...values, id: uuidv4() }));
-
             formik.resetForm();
         },
     });
 
-    const handleDelete = (productId) => {
-        if (window.confirm("Are you sure to delete this product?")) {
-            dispatch(productAction.delete(productId));
+    const handleDeleteProduct = useCallback(
+        (id) => {
+            (window.confirm("Are you sure to delete this product?"));
+            dispatch(deleteProductById({ id }));
         }
-    };
+    );
 
     return (
         <>
@@ -86,7 +78,7 @@ const CreateProductFormik = () => {
                 bahasa={isIndonesia}
                 gantiBahasa={handleBahasa}
             />
-            <ProductList products={products} handleDelete={handleDelete} />
+            <ProductList products={products} handleDelete={handleDeleteProduct} />
         </>
     );
 }
