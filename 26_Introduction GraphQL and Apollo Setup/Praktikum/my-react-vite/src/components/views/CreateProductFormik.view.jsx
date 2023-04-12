@@ -33,7 +33,7 @@ const CreateProductFormik = () => {
     }, []);
 
     useEffect(() => {
-        console.log(productType);
+        // console.log(productType);
         if (productType === createProduct.fulfilled.type) {
             dispatch(retrieveProducts());
         }

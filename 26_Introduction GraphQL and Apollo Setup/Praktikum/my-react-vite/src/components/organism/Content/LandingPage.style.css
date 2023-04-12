@@ -1,0 +1,60 @@
+main {
+	background-color: #37517e;
+    color: white;
+}
+
+.newsletter {
+	background-color: #f3f5fa;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	height: 300px;
+}
+
+.newsletter-text {
+	width: 636px;
+}
+
+.newsletter-text h2 {
+	color: #37517e;
+	font-size: 24px;
+	line-height: 24px;
+	font-weight: 600;
+	margin-bottom: 16px;
+}
+
+.newsletter-text p {
+	font-family: "Open Sans", sans-serif;
+}
+
+.newsletter-text form {
+	position: relative;
+}
+
+#insubs {
+	width: 100%;
+    color: #000;
+    background-color: white;
+	border-radius: 50px;
+	border-style: solid ;
+    border-color: #47b2e4;
+	height: 42.5px;
+	padding: 15px;
+}
+
+#subs {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 9.25px 20px;
+	border-style: none;
+	border-radius: 50px;
+	background-color: #47b2e4;
+	color: white;
+}
+
+form button:hover {
+	transition: ease-in-out;
+	transition-duration: 1s;
+	background-color: #0072a8;
+}
