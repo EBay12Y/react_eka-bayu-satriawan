@@ -6,7 +6,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 
 const RETRIEVE_PRODUCTS_QUERY = gql`
     query RETRIEVE_PRODUCTS_QUERY {
-        product {
+        product(order_by: {id: asc}) {
         id
         product_name
         product_category
